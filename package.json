@@ -1,0 +1,21 @@
+{
+  "name": "nx-redirect",
+  "version": "1.0.0",
+  "description": "Redirect switch screenshots to another account/discord",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "Animal",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "twitter-api-v2": "^1.12.7",
+    "undici": "^5.11.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.8.0"
+  }
+}

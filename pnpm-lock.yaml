@@ -1,0 +1,42 @@
+lockfileVersion: 5.4
+
+specifiers:
+  '@types/node': ^18.8.0
+  twitter-api-v2: ^1.12.7
+  undici: ^5.11.0
+
+dependencies:
+  twitter-api-v2: 1.12.7
+  undici: 5.11.0
+
+devDependencies:
+  '@types/node': 18.8.0
+
+packages:
+
+  /@types/node/18.8.0:
+    resolution: {integrity: sha512-u+h43R6U8xXDt2vzUaVP3VwjjLyOJk6uEciZS8OSyziUQGOwmk+l+4drxcsDboHXwyTaqS1INebghmWMRxq3LA==}
+    dev: true
+
+  /busboy/1.6.0:
+    resolution: {integrity: sha512-8SFQbg/0hQ9xy3UNTB0YEnsNBbWfhf7RtnzpL7TkBiTBRfrQ9Fxcnz7VJsleJpyp6rVLvXiuORqjlHi5q+PYuA==}
+    engines: {node: '>=10.16.0'}
+    dependencies:
+      streamsearch: 1.1.0
+    dev: false
+
+  /streamsearch/1.1.0:
+    resolution: {integrity: sha512-Mcc5wHehp9aXz1ax6bZUyY5afg9u2rv5cqQI3mRrYkGC8rW2hM02jWuwjtL++LS5qinSyhj2QfLyNsuc+VsExg==}
+    engines: {node: '>=10.0.0'}
+    dev: false
+
+  /twitter-api-v2/1.12.7:
+    resolution: {integrity: sha512-kz0/algmi49xejjrKoEJEpXCa1Y0d2MHHhjJZS55ORcqzs8RHxvLO1oWeJNvFz/o+FQW+sFCpmM/5DyYy+QBXw==}
+    dev: false
+
+  /undici/5.11.0:
+    resolution: {integrity: sha512-oWjWJHzFet0Ow4YZBkyiJwiK5vWqEYoH7BINzJAJOLedZ++JpAlCbUktW2GQ2DS2FpKmxD/JMtWUUWl1BtghGw==}
+    engines: {node: '>=12.18'}
+    dependencies:
+      busboy: 1.6.0
+    dev: false
