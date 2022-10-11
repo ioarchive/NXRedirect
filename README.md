@@ -64,6 +64,7 @@ pnpm i
 tsc
 node .
 ```
+i run this with pm2 using `pm2 start dist/index.js --node-args="--harmony"` but you can do any other method you want
 
 There is no feedback for successful connection, but it should be connected unless you receive an error.
 
