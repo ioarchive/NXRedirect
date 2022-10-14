@@ -17,8 +17,18 @@ const stream = await client.v2.searchStream();
 stream.autoReconnect = config.autoReconnect;
 
 
-stream.on(ETwitterStreamEvent.ConnectionError, e => console.log("Connection error:", e));
-stream.on(ETwitterStreamEvent.Error, e => console.log("Twitter error:", e));
+stream.on(ETwitterStreamEvent.ConnectionError, e => {
+    console.log("Connection error:", e);
+    stream.close();
+    process.exit(1);
+});
+stream.on(ETwitterStreamEvent.Error, e => {
+    console.log("Twitter error:", e);
+    if (e.message?.toString().includes("Connection closed by Twitter")) {
+        stream.close();
+        process.exit(1);
+    };
+});
 
 await client.v2.updateStreamRules({
     add: [
@@ -67,7 +77,7 @@ for await (const { data } of stream) {
         fileIndex++;
     }
 
-    logDebug(formData)
+    logDebug(formData);
     request(config.webhookUrl, {
         method: "POST",
         body: formData
