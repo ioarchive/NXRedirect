@@ -72,6 +72,7 @@ async function compressVideo(id: string, blob: Blob) {
     await ffmpeg.run('-i', `${id}.mp4`, '-c:v', 'libx264', '-s:v', '1280x720', '-crf', '36', '-preset:v', 'fast', `output_${id}.mp4`);
     let output = ffmpeg.FS('readFile', `output_${id}.mp4`)
     let outputBlob = new Blob([new Uint8Array(output.buffer, output.byteOffset, output.length)]);
+    ffmpeg.exit()
     return outputBlob;
 }
 
