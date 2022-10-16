@@ -3,5 +3,5 @@ dist/
 package-lock.json
 .vscode/
 .env
-src/config.json
-src/rules.json
+rules.json
+config.json

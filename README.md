@@ -61,10 +61,9 @@ Example:
 Finally, build and run:
 ```
 pnpm i
-tsc
+pnpm build
 node .
 ```
-i run this with pm2 using `pm2 start dist/index.js --node-args="--harmony"` but you can do any other method you want
 
 There is no feedback for successful connection, but it should be connected unless you receive an error.
 
@@ -74,3 +73,4 @@ To be completely honest I will probably not touch this for a while so if you wan
 To do:
 - [ ] Add support for private accounts
 - [ ] Support removing added rules through same json file
+- [ ] Do something about some videos managing to be over 8mb (currently just grabs the lowest bitrate) (LITERALLY HOW, its a switch)

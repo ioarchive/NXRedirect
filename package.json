@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "description": "Redirect switch screenshots to another account/discord",
   "main": "dist/index.js",
-  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc"
+    "build": "node build.mjs",
+    "dn": "echo deez nuts"
   },
   "keywords": [],
   "author": "Animal",
@@ -16,6 +15,7 @@
     "undici": "^5.11.0"
   },
   "devDependencies": {
-    "@types/node": "^18.8.0"
+    "@types/node": "^18.8.0",
+    "esbuild": "^0.15.11"
   }
 }
