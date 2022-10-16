@@ -73,4 +73,4 @@ To be completely honest I will probably not touch this for a while so if you wan
 To do:
 - [ ] Add support for private accounts
 - [ ] Support removing added rules through same json file
-- [ ] Do something about some videos managing to be over 8mb (currently just grabs the lowest bitrate) (LITERALLY HOW, its a switch)
+- [ ] Do something about some videos managing to be over 8mb (currently compresses with [ffmpeg-wasm](https://github.com/ffmpegwasm/ffmpeg.wasm)) (LITERALLY HOW, its a switch)

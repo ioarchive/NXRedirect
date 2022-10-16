@@ -1,11 +1,15 @@
+import { Blob } from "buffer";
 import { TweetV1 } from "twitter-api-v2";
 import { request, FormData } from "undici";
 import BodyReadable from "undici/types/readable";
-import { logDebug, config }  from ".";
+import { logDebug, config } from ".";
+import { createFFmpeg } from "@ffmpeg/ffmpeg";
 
-async function uploadVideo(tweet: TweetV1) {
+async function downloadMedia(tweet: TweetV1) {
     let fileIndex = 0;
     let formData = new FormData();
+
+    logDebug(tweet.extended_entities!.media?.forEach(media => JSON.stringify(media.video_info)));
 
     formData.append("payload_json", JSON.stringify({ content: (tweet.text || tweet.full_text)?.replace(/https:(\/\/t\.co\/([A-Za-z0-9]|[A-Za-z]){10})/, "") }));
 
@@ -31,22 +35,44 @@ async function uploadVideo(tweet: TweetV1) {
                 default:
                     throw new Error("Unknown media type");
             }
-            formData.append(`file${fileIndex.toString()}`, await photoVideo.data.blob(), `nxr_${tweet.id_str}.${photoVideo.type}`);
+            let blob = await photoVideo.data.blob();
+            if (blob.size < 8000000) {
+                formData.append(`file${fileIndex.toString()}`, blob, `nxr_${tweet.id_str}.${photoVideo.type}`);
+            } else {
+                let newBlob = await compressVideo(tweet.id_str, blob);
+                formData.append(`file${fileIndex.toString()}`, newBlob, `nxr_${tweet.id_str}.${photoVideo.type}`);
+            }
         } catch (e) {
             console.log(e);
+            return;
         }
         fileIndex++;
     }
+    uploadMedia(formData);
+}
 
+async function uploadMedia(formData: FormData) {
     logDebug(formData);
     try {
         request(config.webhookUrl, {
             method: "POST",
             body: formData
-        });   
+        });
     } catch (error) {
         console.error(error);
     }
 }
 
-export default uploadVideo;
+// Compress video if it's over 8MB
+// yeah you can just grab a different video variant but i do not trust twitter
+async function compressVideo(id: string, blob: Blob) {
+    const ffmpeg = createFFmpeg({ log: config.logDebug });
+    await ffmpeg.load();
+    ffmpeg.FS('writeFile', `${id}.mp4`, new Uint8Array(await blob.arrayBuffer()));
+    await ffmpeg.run('-i', `${id}.mp4`, '-c:v', 'libx264', '-s:v', '1280x720', '-crf', '36', '-preset:v', 'fast', `output_${id}.mp4`);
+    let output = ffmpeg.FS('readFile', `output_${id}.mp4`)
+    let outputBlob = new Blob([new Uint8Array(output.buffer, output.byteOffset, output.length)]);
+    return outputBlob;
+}
+
+export default downloadMedia;

@@ -1,7 +1,7 @@
 import { ETwitterStreamEvent, TwitterApi } from "twitter-api-v2";
 import config from "../config.json";
 import rules from "../rules.json";
-import uploadVideo from "./media";
+import downloadMedia from "./media";
 
 async function start() {
     process.on("SIGINT", () =>{
@@ -43,7 +43,7 @@ async function start() {
             continue;
         }
 
-        uploadVideo(tweet);
+        downloadMedia(tweet);
     }
 }
 

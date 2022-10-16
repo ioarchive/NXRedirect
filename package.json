@@ -11,6 +11,8 @@
   "author": "Animal",
   "license": "Apache-2.0",
   "dependencies": {
+    "@ffmpeg/core": "^0.11.0",
+    "@ffmpeg/ffmpeg": "^0.11.5",
     "twitter-api-v2": "^1.12.7",
     "undici": "^5.11.0"
   },
