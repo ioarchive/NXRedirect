@@ -1,5 +1,7 @@
 # NXRedirect
 
+## This was broken by elon musk being a dumb human
+
 A program to redirect/forward media tweets made from a Nintendo Switch onto Discord. 
 
 ## Usage:
